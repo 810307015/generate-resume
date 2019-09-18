@@ -1,0 +1,1 @@
+import { createBrowserHistory } from 'history';
