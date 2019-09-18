@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-const RouteWithSubRoutes = (route) => {
+function RouteWithSubRoutes(route) {
   return (
     <Route
       path={route.path}
@@ -12,6 +12,6 @@ const RouteWithSubRoutes = (route) => {
   );
 }
 
-export {
+export default {
   RouteWithSubRoutes
 };

@@ -1,12 +1,12 @@
 import React from 'react';
-import { RouteWithSubRoutes } from '../../Utils/utils';
+import utils from '../../Utils/utils';
 
 function BaseInfo(props) {
   return (
     <div className="BaseInfo">
       基本信息
       {props.routes.map((route, i) => (
-        <RouteWithSubRoutes key={i} {...route} />
+        <utils.RouteWithSubRoutes key={i} {...route} />
       ))}
     </div>
   );

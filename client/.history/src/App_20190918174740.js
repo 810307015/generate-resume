@@ -1,8 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { RouteWithSubRoutes } from './Utils/utils';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import routes from './Routes';
+
+function RouteWithSubRoutes(route) {
+  return (
+    <Route
+      path={route.path}
+      render={props => (
+        <route.component {...props} routes={route.routes} />
+      )}
+    />
+  );
+}
 
 function App(props) {
 

@@ -12,6 +12,8 @@ const RouteWithSubRoutes = (route) => {
   );
 }
 
-export {
+const utils = {
   RouteWithSubRoutes
-};
+}
+
+module.exports = utils;
