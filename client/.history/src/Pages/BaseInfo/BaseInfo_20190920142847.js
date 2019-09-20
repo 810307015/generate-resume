@@ -1,8 +1,6 @@
 import React from 'react';
 import { RouteWithSubRoutes, htmlTranslateImage } from '../../Utils/utils';
 
-import './BaseInfo.scss';
-
 function BaseInfo(props) {
   return (
     <div className="BaseInfo">

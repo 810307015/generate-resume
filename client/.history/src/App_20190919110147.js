@@ -12,6 +12,9 @@ function App(props) {
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}
+        {routes.map((route, i) => (
+          <RouteWithExactRoutes key={i} {...route} />
+        ))}
       </Router>
     </div>
   );

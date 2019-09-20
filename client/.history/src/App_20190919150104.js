@@ -9,8 +9,9 @@ function App(props) {
   return (
     <div className="App">
       <Router>
+
         {routes.map((route, i) => (
-          <RouteWithSubRoutes key={i} {...route} />
+          <RouteWithExactRoutes key={i} {...route} />
         ))}
       </Router>
     </div>

@@ -1,7 +1,5 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import htmlToImage from 'html-to-image';
-import download from 'downloadjs';
 
 const RouteWithSubRoutes = (route) => {
   return (
@@ -24,19 +22,6 @@ const RouteWithExactRoutes = (route) => {
   );
 }
 
-const htmlTranslateImage = () => {
-  const root = document.getElementById('root');
-  htmlToImage.toPng(root)
-    .then(function (dataUrl) {
-      download(dataUrl, 'test.png');
-    })
-    .catch(function (error) {
-      console.error('转成图片失败', error);
-    });
-}
-
 export {
-  RouteWithSubRoutes,
-  RouteWithExactRoutes,
-  htmlTranslateImage
+  RouteWithSubRoutes
 };

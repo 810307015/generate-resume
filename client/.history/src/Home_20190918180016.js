@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteWithSubRoutes } from './Utils/utils';
+import { RouteWithSubRoutes } from '../../Utils/utils';
 
 function Home(props) {
   return (

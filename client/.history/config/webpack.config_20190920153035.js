@@ -289,7 +289,7 @@ module.exports = function (webpackEnv) {
       alias: {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-        'react-native': 'react-native-web'
+        'react-native': 'react-native-web',
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -493,6 +493,9 @@ module.exports = function (webpackEnv) {
           ],
         },
       ],
+    },
+    alias: {
+      '@style': path.resolve('style')
     },
     plugins: [
       // Generates an `index.html` file with the <script> injected.

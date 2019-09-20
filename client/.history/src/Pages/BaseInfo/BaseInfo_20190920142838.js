@@ -1,7 +1,5 @@
 import React from 'react';
-import { RouteWithSubRoutes, htmlTranslateImage } from '../../Utils/utils';
-
-import './BaseInfo.scss';
+import { RouteWithSubRoutes } from '../../Utils/utils';
 
 function BaseInfo(props) {
   return (
@@ -10,7 +8,7 @@ function BaseInfo(props) {
       {props.routes.map((route, i) => (
         <RouteWithSubRoutes key={i} {...route} />
       ))}
-      <span onClick={htmlTranslateImage}>转出Png</span>
+      <span onClick={}>转出Png</span>
     </div>
   );
 }
