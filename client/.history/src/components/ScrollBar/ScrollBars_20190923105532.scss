@@ -1,0 +1,40 @@
+.ScrollBar {
+  position: relative;
+  overflow: hidden;
+
+  .scroll-bar {
+    &-control {
+      position: absolute;
+
+      &-common {
+        background-color: #666;
+        border-radius: 3px;
+      }
+
+      &-x {
+        height: 6px;
+        left: 0;
+        bottom: 0;
+      }
+
+      &-y {
+        width: 6px;
+        top: 0;
+        right: 0;
+      }
+
+      &.autoHide {
+
+        .scroll-bar-control-x,
+        .scroll-bar-control-y {
+          opacity: 0;
+          transition: opacity 0.2s;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

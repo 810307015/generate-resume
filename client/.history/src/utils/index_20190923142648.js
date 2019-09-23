@@ -50,7 +50,7 @@ const validateDataType = (data, type) => {
  * @param {需要防抖的函数} fn 
  * @param {延迟时间} delay 
  */
-const debounce = (fn, delay = 500) => {
+const debounce = (fn, delay = 1000) => {
   let timer = null;
 
   return function () {

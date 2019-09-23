@@ -1,0 +1,8 @@
+.ScrollBar {
+  position: relative;
+  overflow: hidden;
+
+  .scroll-bar {
+    &-content {}
+  }
+}

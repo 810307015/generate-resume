@@ -53,11 +53,10 @@ const validateDataType = (data, type) => {
 const debounce = (fn, delay = 500) => {
   let timer = null;
 
-  return function () {
+  return function (args) {
     if (timer) {
       clearTimeout(timer);
     }
-    const args = Array.prototype.slice.apply(arguments);
     timer = setTimeout(function () {
       fn.apply(null, args);
     }, delay);

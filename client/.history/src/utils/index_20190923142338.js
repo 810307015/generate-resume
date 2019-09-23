@@ -48,16 +48,16 @@ const validateDataType = (data, type) => {
 /**
  * 
  * @param {需要防抖的函数} fn 
- * @param {延迟时间} delay 
+ * @param {需要传递的参数集合} args 
+ * @param {间隔时间} delay 
  */
 const debounce = (fn, delay = 500) => {
   let timer = null;
 
-  return function () {
+  return function (args) {
     if (timer) {
       clearTimeout(timer);
     }
-    const args = Array.prototype.slice.apply(arguments);
     timer = setTimeout(function () {
       fn.apply(null, args);
     }, delay);

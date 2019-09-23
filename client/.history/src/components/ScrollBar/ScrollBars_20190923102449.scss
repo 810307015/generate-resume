@@ -1,0 +1,14 @@
+.ScrollBar {
+  position: relative;
+  overflow: hidden;
+  $bgColor: #666;
+  $borderRadius: 3px;
+
+  .scroll-bar {
+    &-control {
+      position: absolute;
+
+      &-common {}
+    }
+  }
+}

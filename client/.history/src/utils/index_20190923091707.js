@@ -19,8 +19,8 @@ const translateToImage = (domId = 'root', fileName = 'test.png') => {
 
 /**
  * 
- * @param {需要判断类型的数据} data 
- * @param {需要判断的类型} type 
+ * @param {*需要判断类型的数据} data 
+ * @param {*需要判断的类型} type 
  */
 const validateDataType = (data, type) => {
   let flag = false;
@@ -45,27 +45,7 @@ const validateDataType = (data, type) => {
   return flag;
 };
 
-/**
- * 
- * @param {需要防抖的函数} fn 
- * @param {延迟时间} delay 
- */
-const debounce = (fn, delay = 500) => {
-  let timer = null;
-
-  return function () {
-    if (timer) {
-      clearTimeout(timer);
-    }
-    const args = Array.prototype.slice.apply(arguments);
-    timer = setTimeout(function () {
-      fn.apply(null, args);
-    }, delay);
-  };
-};
-
-export {
+export default {
   translateToImage,
-  validateDataType,
-  debounce
+  validateDataType
 };
