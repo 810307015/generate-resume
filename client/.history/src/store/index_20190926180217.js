@@ -1,0 +1,1 @@
+import configureStore, { history } from 'Reducers/configureStore'
