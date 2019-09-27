@@ -17,16 +17,11 @@ const translateToImage = (domId = 'root', fileName = 'test.png') => {
     })
 }
 
-/**
- * 
- * @param {需要判断的真实对象类型的数据} obj 
- */
 const getRealObjectType = (obj) => {
   if (typeof obj !== 'object') {
     return typeof obj;
   }
-  const objectType = Object.prototype.toString.apply(obj);
-  return objectType.slice(8, objectType.length - 1).toLowerCase();
+  return Object.prototype.toString.apply(obj).slice(8, 14).toLowerCase();
 };
 
 /**
@@ -54,10 +49,10 @@ const debounce = (fn, delay = 500) => {
  */
 const deepClone = (obj) => {
   let _obj = Array.isArray(obj) ? [] : {};
-  if (obj && ['object', 'array'].includes(getRealObjectType(obj))) {
+  if (obj && typeof obj === 'object') {
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
-        if (obj[key] && ['object', 'array'].includes(getRealObjectType(obj[key]))) {
+        if (obj[key] && typeof obj[key] === 'object') {
           _obj[key] = deepClone(obj[key]);
         } else {
           _obj[key] = obj[key];
@@ -70,7 +65,7 @@ const deepClone = (obj) => {
 
 export {
   translateToImage,
-  getRealObjectType,
+  validateDataType,
   debounce,
   deepClone
 };

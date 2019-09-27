@@ -57,7 +57,7 @@ const deepClone = (obj) => {
   if (obj && ['object', 'array'].includes(getRealObjectType(obj))) {
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
-        if (obj[key] && ['object', 'array'].includes(getRealObjectType(obj[key]))) {
+        if (obj[key] && ['object', 'array'].includes(getRealObjectType(obj))) {
           _obj[key] = deepClone(obj[key]);
         } else {
           _obj[key] = obj[key];

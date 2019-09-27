@@ -19,14 +19,32 @@ const translateToImage = (domId = 'root', fileName = 'test.png') => {
 
 /**
  * 
- * @param {需要判断的真实对象类型的数据} obj 
+ * @param {需要判断类型的数据} data 
+ * @param {需要判断的类型} type 
  */
-const getRealObjectType = (obj) => {
-  if (typeof obj !== 'object') {
-    return typeof obj;
+const validateDataType = (data, type) => {
+  let flag = false;
+  switch (type) {
+    case 'number':
+    case 'string':
+    case 'function':
+    case 'undefined':
+    case 'symbol':
+    case 'boolean':
+    case 'object':
+      flag = typeof data === type;
+      break;
+    case 'null':
+      flag = Object.prototype.toString.apply(data) === '[object Null]';
+      break;
+    case 'array':
+      flag = Object.prototype.toString.apply(data) === '[object Array]';
+    case 'NaN':
+      flag = isNaN(data);
+      break;
   }
-  const objectType = Object.prototype.toString.apply(obj);
-  return objectType.slice(8, objectType.length - 1).toLowerCase();
+
+  return flag;
 };
 
 /**
@@ -48,29 +66,12 @@ const debounce = (fn, delay = 500) => {
   };
 };
 
-/**
- * 
- * @param {需要深拷贝的对象} obj 
- */
 const deepClone = (obj) => {
-  let _obj = Array.isArray(obj) ? [] : {};
-  if (obj && ['object', 'array'].includes(getRealObjectType(obj))) {
-    for (let key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if (obj[key] && ['object', 'array'].includes(getRealObjectType(obj[key]))) {
-          _obj[key] = deepClone(obj[key]);
-        } else {
-          _obj[key] = obj[key];
-        }
-      }
-    }
-  }
-  return _obj;
+  let _obj = validateDataType(obj, 'array')
 };
 
 export {
   translateToImage,
-  getRealObjectType,
-  debounce,
-  deepClone
+  validateDataType,
+  debounce
 };

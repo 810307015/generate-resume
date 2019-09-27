@@ -26,7 +26,7 @@ const getRealObjectType = (obj) => {
     return typeof obj;
   }
   const objectType = Object.prototype.toString.apply(obj);
-  return objectType.slice(8, objectType.length - 1).toLowerCase();
+  return objectType.slice(8, objectType.length - 2).toLowerCase();
 };
 
 /**
@@ -54,10 +54,10 @@ const debounce = (fn, delay = 500) => {
  */
 const deepClone = (obj) => {
   let _obj = Array.isArray(obj) ? [] : {};
-  if (obj && ['object', 'array'].includes(getRealObjectType(obj))) {
+  if (obj && typeof obj === 'object') {
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
-        if (obj[key] && ['object', 'array'].includes(getRealObjectType(obj[key]))) {
+        if (obj[key] && typeof obj[key] === 'object') {
           _obj[key] = deepClone(obj[key]);
         } else {
           _obj[key] = obj[key];
