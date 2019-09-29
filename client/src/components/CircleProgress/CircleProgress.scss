@@ -1,41 +1,18 @@
+@import 'Assets/style/mixin.scss';
+
 .CircleProgress {
-  .isTop {
-    z-index: 100;
+  position: relative;
+  display: inline-block;
+
+  .circle-box {
+    circle {
+      transition: all 0.3s;
+    }
   }
-  .isBottom {
-    z-index: -1;
-  }
+
   .progress {
-    &-circle {
-      position: relative;
-      border-radius: 50%;
-      text-align: center;
-    }
-
-    &-bg,
-    &-fill {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-
-      .before,
-      .after {
-        position: absolute;
-        top: 0;
-        border-style: solid;
-        transition: all 0.4s;
-      }
-
-      .before {
-        left: 0;
-        transform-origin: right;
-      }
-
-      .after {
-        right: 0;
-        transform-origin: left;
-      }
-    }
+    position: absolute;
+    font-size: 12px;
+    @include center-both;
   }
 }

@@ -6,9 +6,9 @@ const initialState = {
 };
 
 const handlers = {
-  'INCREMENT': (state, action) => ({ ...state, count: state.count + action.data }),
-  'DECREMENT': (state, action) => ({ ...state, count: state.count - action.data }),
-  'GET_TEST_DATA': (state, action) => ({ ...state, testData: action.data })
+  'INCREMENT': (state, action) => ({ ...state, count: state.count + action.payload.data }),
+  'DECREMENT': (state, action) => ({ ...state, count: state.count - action.payload.data }),
+  'GET_TEST_DATA': (state, action) => ({ ...state, testData: action.payload.data })
 }
 
 export default createReducer(initialState, handlers);

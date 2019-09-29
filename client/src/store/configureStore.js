@@ -4,7 +4,7 @@ import { routerMiddleware } from 'connected-react-router';
 
 import createRootReducer from 'Reducers';
 import customMiddleware from './customMiddleware';
-import customLogger from './customLogger';
+// import customLogger from './customLogger';
 
 export const history = createBrowserHistory();
 
@@ -16,7 +16,7 @@ export default function configureStore(preloadedState) {
       applyMiddleware(
         routerMiddleware(history), // for dispatching history actions
         customMiddleware, // 自定义promise中间件
-        customLogger
+        // customLogger
         // ... other middlewares ...
       ),
     ),

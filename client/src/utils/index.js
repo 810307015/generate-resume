@@ -68,9 +68,27 @@ const deepClone = (obj) => {
   return _obj;
 };
 
+/**
+ * 将查询字符串转化成json的格式
+ * @param {查询字符串} search 
+ */
+const searchToQuery = (search) => {
+  if (search.length <= 1) {
+    return {};
+  }
+  const queryArr = search.slice(1).split('&');
+  const query = {};
+  queryArr.forEach(q => {
+    const [key, value = key] = q.split('=');
+    query[key] = value;
+  });
+  return query;
+};
+
 export {
   translateToImage,
   getRealObjectType,
   debounce,
-  deepClone
+  deepClone,
+  searchToQuery
 };
