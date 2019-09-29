@@ -42,7 +42,6 @@ function CircleProgress(props) {
 
   const caculateRatio = () => {
     const ratio = props.ratio;
-    setPercent(ratio);
     if(ratio < 0 || ratio > 100) {
       return;
     }
@@ -55,6 +54,7 @@ function CircleProgress(props) {
       setIsBottom(true);
       setRightRotate(deg);
     }
+    setPercent(ratio);
   };
 
   useEffect(() => {

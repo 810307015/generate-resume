@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from 'react';
-
-import CircleProgress from 'Components/CircleProgress/CircleProgress';
+import React from 'react';
 
 import './Home.scss';
 
 function Home(props) {
 
-  const [ratio, setRatio] = useState(0);
-
-  const handleClick = () => {
-    setRatio(ratio + 10);
-  };
-
-  useEffect(() => {
-    
-  });
-
   return (
-    <div className="Home" onClick={handleClick}>
+    <div className="Home">
       主页
-      <CircleProgress ratio={ratio} />
       {props.children}
     </div>
   )

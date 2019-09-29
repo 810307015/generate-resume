@@ -18,6 +18,7 @@
   1. yarn add eslint babel-eslint eslint-plugin-react eslint-config-alloy --dev
   2. 新建一个.eslintrc.js，将github上描述的文件内容复制进去。
 * redux与react-router的v4.0版本以上的结合，yarn add connected-react-router安装相应的包，参照github上引导完成对应的基础配置。
+* 由于高版本的react-scripts中不支持配置格式为对象的proxy字段，需要引入http-proxy-middleware包，然后在src目录下创建setupProxy.js文件，在里面增加对proxy的描述，以提供多个不同的来源的服务（比如api和文件服务）。
 
 ## 文件夹注释
 

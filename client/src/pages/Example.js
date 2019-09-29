@@ -1,35 +1,51 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button } from 'antd';
 
-import { increment, decrement } from 'Action/example';
+import * as exampleAction from 'Action/example';
 
-const Counter = (props) => (
-  <div>
-    Counter: {props.count}
-    <Button onClick={() => props.increment(111)}>+</Button>
-    <Button onClick={() => props.decrement(100)}>-</Button>
-  </div>
-)
+const Counter = (props) => {
+  const { exampleAction: { increment, decrement, testPromise, testNoType }, testData } = props;
 
-Counter.propTypes = {
-  count: PropTypes.number,
-  increment: PropTypes.func.isRequired,
-  decrement: PropTypes.func.isRequired,
-}
+  const handlePromise = () => {
+    testPromise({}, (res) => {
+      console.log('请求成功', res);
+    })
+  };
+
+  const handleNoTypePromise = () => {
+    testNoType({}, (res) => {
+      console.log('请求成功', res);
+    });
+  };
+
+  return (
+    <div>
+      Counter: {props.count}
+      <Button onClick={() => increment(111)}>+</Button>
+      <Button onClick={() => decrement(100)}>-</Button>
+      <Button onClick={handlePromise}>发请求</Button>
+      <Button onClick={handleNoTypePromise}>发请求（不走reducer）</Button>
+      {
+        testData.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))
+      }
+    </div>
+  )
+};
 
 const mapStateToProps = state => {
-  const { count } = state.example;
+  const { count, testData } = state.example;
   return {
-    count
+    count,
+    testData
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  increment: bindActionCreators(increment, dispatch),
-  decrement: bindActionCreators(decrement, dispatch),
+  exampleAction: bindActionCreators(exampleAction, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter)

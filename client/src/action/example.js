@@ -1,9 +1,26 @@
+import { getTestData, getTestString } from 'Api/example';
+
 export const increment = (data = 1) => ({
   type: 'INCREMENT',
-  data: data
+  data
 })
 
 export const decrement = (data = 1) => ({
   type: 'DECREMENT',
-  data: data
+  data
 })
+
+export const testPromise = (param = {}, success, error) => ({
+  type: 'GET_TEST_DATA',
+  promise: getTestData,
+  param,
+  success,
+  error
+})
+
+export const testNoType = (param = {}, success, error) => ({
+  param,
+  promise: getTestString,
+  success,
+  error
+});
