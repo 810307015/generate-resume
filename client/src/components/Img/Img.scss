@@ -1,0 +1,22 @@
+.Img {
+  display: inline-block;
+}
+
+.Img-img {
+  background: {
+    repeat: no-repeat;
+    position: center;
+    size: contain;
+  }
+}
+
+.ant-modal-wrap  {
+  .ant-modal-content {
+    .ant-modal-body {
+      .Img-img {
+        width: 100%;
+        height: 500px;
+      }
+    }
+  }
+}

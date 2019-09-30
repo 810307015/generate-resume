@@ -41,11 +41,37 @@ const debounce = (fn, delay = 500) => {
     if (timer) {
       clearTimeout(timer);
     }
+    const context = this;
     const args = Array.prototype.slice.apply(arguments);
     timer = setTimeout(function () {
-      fn.apply(null, args);
+      fn.apply(context, args);
     }, delay);
   };
+};
+
+/**
+ * 
+ * @param {需要节流的函数} fn 
+ * @param {间隔时间} delay 
+ */
+const throttle = (fn, delay = 500) => {
+  let last = null;
+  let timer = null;
+  return function() {
+    const context = this;
+    const args = arguments;
+    const now = +new Date();
+    if (last && now < last + delay) {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        last = now;
+        fn.apply(context, args);
+      }, delay)
+    } else {
+      last = now;
+      fn.apply(context, args);
+    }
+  }
 };
 
 /**
@@ -89,6 +115,7 @@ export {
   translateToImage,
   getRealObjectType,
   debounce,
+  throttle,
   deepClone,
   searchToQuery
 };

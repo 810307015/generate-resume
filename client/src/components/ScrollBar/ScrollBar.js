@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import { debounce } from 'Utils';
+
 import './ScrollBars.scss';
 
 function ScrollBar(props) {
@@ -29,45 +31,55 @@ function ScrollBar(props) {
 
   let currentWH = {}; // 当前容器和内容部分的宽高信息
 
-  // // 处理鼠标在滚动条上按下时的事件
-  // const handleMouseDown = (e) => {
-  //   console.log('移入', e);
-  //   setIsScrollbarMove(true);
-  //   setIsScrolling(true);
-  //   setStartY(e.clientY);
-  //   console.log(startY);
-  // }
-
-  // // 处理鼠标在滚动条上松开或离开滚动条时的事件
-  // const handleMouseUp = (e) => {
-  //   console.log('移出', e, e.clientY);
-  //   setIsScrollbarMove(false);
-  //   setIsScrolling(false);
-  //   setStartY(0);
-  // }
-
-  // // 处理鼠标在滚动条上移动时的事件
-  // const handleMouseMove = (e) => {
-  //   if (!isScrollbarMove) {
-  //     return;
-  //   }
-  //   const { conHeight, cHeight } = currentWH;
-  //   const deltaY = e.clientY - startY;
-  //   if ((yTop + deltaY) <= (conHeight - yHeight) && (yTop + deltaY) >= 0) {
-  //     setYTop(yTop + deltaY);
-  //     setCTop(cTop - (deltaY / (conHeight / cHeight)));
-  //   }
-  // }
+  // 是否可以滚动滚动条，可以就滚动
+  const isCanScroll = (deltaY) => {
+    const { conHeight, ratio } = currentWH;
+    const distanceMax = (conHeight - yHeight) - yTop;
+    if(deltaY < 0 && yTop + deltaY < 0) {
+      setYTop(0);
+      setCTop(0);
+      return;
+    }
+    if(distanceMax < deltaY) {
+      setYTop(yTop + distanceMax);
+      setCTop(cTop - (distanceMax / ratio));
+      return;
+    }
+    setYTop(yTop + deltaY);
+    setCTop(cTop - (deltaY / ratio));
+  };
 
   // 滚轮事件
   const handleWheel = (e) => {
+    e.persist();
     setIsScrolling(true);
     const deltaY = e.deltaY / 25;
-    const { conHeight, cHeight } = currentWH;
-    if ((yTop + deltaY) <= (conHeight - yHeight) && (yTop + deltaY) >= 0) {
-      setYTop(yTop + deltaY);
-      setCTop(cTop - (deltaY / (conHeight / cHeight)));
-    }
+    isCanScroll(deltaY);
+  };
+
+  // 开始拖动
+  const handleDragStart = (e) => {
+    setStartY(e.clientY);
+    setIsScrolling(true);
+  };
+
+  // 拖动中
+  const handleDrag = (e) => {
+    e.persist();
+    debounce(() => {
+      const deltaY = (e.clientY - startY)/4;
+      isCanScroll(deltaY);
+    }, 50)();
+  };
+
+  // 拖动结束
+  const handleDragEnd = (e) => {
+    e.persist();
+    setIsScrolling(false);
+    debounce(() => {
+      const deltaY = (e.clientY - startY)/4;
+      isCanScroll(deltaY);
+    }, 50)();
   };
 
   // 初始化滚动条的展示和宽高
@@ -93,7 +105,8 @@ function ScrollBar(props) {
       conWidth,
       conHeight,
       cWidth,
-      cHeight
+      cHeight,
+      ratio: conHeight / cHeight
     }
   };
 
@@ -113,17 +126,25 @@ function ScrollBar(props) {
       <div className={`scroll-bar-control ${autoHide ? 'autoHide' : ''} ${isScrolling ? 'active' : ''}`}>
         {
           mode !== 'y' && isShowControlX &&
-          <div
-            className="scroll-bar-control-common scroll-bar-control-x"
-            style={{ width: xWidth, transform: `translateX(${xLeft}px)` }}
-          />
+          <div className="scroll-bar-control-container scroll-bar-control-container-x" style={{ width }}>
+            <div
+              className="scroll-bar-control-common scroll-bar-control-x"
+              style={{ width: xWidth, transform: `translateX(${xLeft}px)` }}
+            />
+          </div>
         }
         {
           mode !== 'x' && isShowControlY &&
-          <div
-            className="scroll-bar-control-common scroll-bar-control-y"
-            style={{ height: yHeight, transform: `translateY(${yTop}px)` }}
-          />
+          <div className="scroll-bar-control-container scroll-bar-control-container-y" style={{ height }}>
+            <div
+              className="scroll-bar-control-common scroll-bar-control-y"
+              style={{ height: yHeight, transform: `translateY(${yTop}px)` }}
+              draggable
+              onDrag={handleDrag}
+              onDragStart={handleDragStart}
+              onDragEnd={handleDragEnd}
+            />
+          </div>
         }
       </div>
     </div>

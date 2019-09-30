@@ -12,7 +12,7 @@ function CircleProgress(props) {
   };
 
   const realProps = { ...defaultProps, ...props };
-  const { progress, radius, strokeInner, stokeOuter, strokeWidth, tips } = realProps;
+  const { progress, radius, strokeInner, stokeOuter, strokeWidth } = realProps;
   const perimeter = radius * 2 * Math.PI;
   const progressLength = progress * perimeter;
   const size = (radius + strokeWidth) * 2;

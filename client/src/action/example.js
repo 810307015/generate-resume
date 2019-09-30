@@ -1,4 +1,4 @@
-import { getTestData, getTestString } from 'Api/example';
+import { getTestData, getTestString, setTestData } from 'Api/example';
 
 export const increment = (data = 1) => ({
   type: 'INCREMENT',
@@ -32,3 +32,12 @@ export const testNoType = (param = {}, success, error) => ({
     error
   }
 });
+
+export const testPostData = (param = {}, success, error) => ({
+  payload: {
+    promise: setTestData,
+    param,
+    success,
+    error
+  }
+})
