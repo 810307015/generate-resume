@@ -35,12 +35,12 @@ function ScrollBar(props) {
   const isCanScroll = (deltaY) => {
     const { conHeight, ratio } = currentWH;
     const distanceMax = (conHeight - yHeight) - yTop;
-    if(deltaY < 0 && yTop + deltaY < 0) {
+    if (deltaY < 0 && yTop + deltaY < 0) {
       setYTop(0);
       setCTop(0);
       return;
     }
-    if(distanceMax < deltaY) {
+    if (distanceMax < deltaY) {
       setYTop(yTop + distanceMax);
       setCTop(cTop - (distanceMax / ratio));
       return;
@@ -51,7 +51,11 @@ function ScrollBar(props) {
 
   // 滚轮事件
   const handleWheel = (e) => {
+    e.stopPropagation();
     e.persist();
+    if (!isShowControlY) {
+      return;
+    }
     setIsScrolling(true);
     const deltaY = e.deltaY / 25;
     isCanScroll(deltaY);
@@ -59,25 +63,28 @@ function ScrollBar(props) {
 
   // 开始拖动
   const handleDragStart = (e) => {
+    e.stopPropagation();
     setStartY(e.clientY);
     setIsScrolling(true);
   };
 
   // 拖动中
   const handleDrag = (e) => {
+    e.stopPropagation();
     e.persist();
     debounce(() => {
-      const deltaY = (e.clientY - startY)/4;
+      const deltaY = (e.clientY - startY) / 4;
       isCanScroll(deltaY);
     }, 50)();
   };
 
   // 拖动结束
   const handleDragEnd = (e) => {
+    e.stopPropagation();
     e.persist();
     setIsScrolling(false);
     debounce(() => {
-      const deltaY = (e.clientY - startY)/4;
+      const deltaY = (e.clientY - startY) / 4;
       isCanScroll(deltaY);
     }, 50)();
   };
