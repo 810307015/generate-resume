@@ -2,7 +2,7 @@ export const menus = [
   {
     id: 1,
     name: '主页',
-    path: '/'
+    path: '/index'
   },
   {
     id: 2,
@@ -11,8 +11,8 @@ export const menus = [
   },
   {
     id: 3,
-    name: '模板详情',
-    path: '/resume/detail'
+    name: '信息填写',
+    path: '/resume/register'
   },
   {
     id: 4,

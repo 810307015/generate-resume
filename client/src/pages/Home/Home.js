@@ -1,7 +1,8 @@
 import React from 'react';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import SideBar from 'Components/SideBar/SideBar';
-import ScrollBar from 'Components/ScrollBar/ScrollBar';
+
 
 import './Home.scss';
 
@@ -11,11 +12,12 @@ function Home(props) {
     <div className="Home">
       <SideBar />
       <div className="Content">
-        <ScrollBar
+        <Scrollbars
           height="100%"
+          autoHide
         >
           {props.children}
-        </ScrollBar>
+        </Scrollbars>
       </div>
     </div>
   )
